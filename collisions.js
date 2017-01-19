@@ -3,7 +3,7 @@ function checkCollisions() {
 
     if (gameState != "attract") {
         var foundARock = false;
-        for (i = actors.length - 1; i >= 0; i--) {
+        for (var i = actors.length - 1; i >= 0; i--) {
             var actor = actors[i];
             if (actor.name == "rock") {
                 foundARock = true;
@@ -79,7 +79,7 @@ function doRockHit(rock) {
 }
 
 function addDebris(x, y) {
-    for (i=0; i<25; i++) {
+    for (var i=0; i<25; i++) {
         var debris = new debrisSprite(x, y);
         actors.push(debris);
     }

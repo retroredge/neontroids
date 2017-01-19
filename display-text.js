@@ -39,12 +39,12 @@ function displayAttractMessage() {
 
         ctx.fillStyle = "#cccccc";
         ctx.font = "15px Verdana";
-        var text2 = "Cursor keys to move, Space to fire";
-        ctx.fillText(text2, (canvas.width / 2) - ctx.measureText(text2).width/2, (canvas.height / 2) + 30);
+        var text3 = "Cursor keys to move, Space to fire";
+        ctx.fillText(text3, (canvas.width / 2) - ctx.measureText(text3).width/2, (canvas.height / 2) + 30);
 
         ctx.font = "15px Verdana";
-        text2 = "or Z & X to rotate, N fire, M thrust";
-        ctx.fillText(text2, (canvas.width / 2) - ctx.measureText(text2).width/2, (canvas.height / 2) + 60);
+        var text4 = "or Z & X to rotate, N fire, M thrust";
+        ctx.fillText(text4, (canvas.width / 2) - ctx.measureText(text4).width/2, (canvas.height / 2) + 60);
   	}
 }
 

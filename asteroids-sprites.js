@@ -21,9 +21,9 @@ function sprite(x, y, vx, vy, polygon) {
 		} else if (this.y < 0) {
 			this.y = canvas.height;
 		}
-	}
+	};
 	
-	this.collidesWith = function collidesWith(sprite) {
+	this.collidesWith = function (sprite) {
 		return spritesCollide(this, sprite);
 	}
 }
@@ -52,12 +52,12 @@ function shipSprite(x, y) {
 	this.missiles = [];
 	this.sprite = new sprite(x, y, 0.0, 0.0, new polygon(this.origPoints, this.color, this.blurCount, "#ffffff"));
 	
-	this.rotate = function rotate(direction) {
+	this.rotate = function (direction) {
 		this.angle += this.angleIncrement * direction;
 		this.sprite.polygon.points = this.origPoints.map(function (polygonPoint) {
 			return rotatePoint(polygonPoint, ship.angle);
 		})
-	}
+	};
 	
 	this.thrust = function thrust() {
 		var oldVx = this.sprite.vx;
@@ -68,9 +68,9 @@ function shipSprite(x, y) {
 			this.sprite.vx = oldVx;
 			this.sprite.vy = oldVy;
 		}
-	}
+	};
 	
-	this.fire = function fire() {
+	this.fire = function () {
 		if (this.missiles.length <= 3) {
 			missile = new missileSprite(this.sprite.x, this.sprite.y, this.angle, this);	
 			missile.move();
@@ -78,7 +78,7 @@ function shipSprite(x, y) {
 			this.missiles.push(missile);
 			this.missileCount++;
 		}
-	}
+	};
 	
 	this.move = function() {
 		this.sprite.move();

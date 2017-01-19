@@ -5,13 +5,14 @@ var lives = 0;
 var gameState = "attract";
 var numRocks = 4;
 var score = 0;
+var canvas;
 
 createRocks();
 initKeyboard();
 runGame();
 
 function initCanvas() {
-	var canvas = document.getElementById("canvas");
+	canvas = document.getElementById("canvas");
 	canvas.width = document.body.clientWidth;
 	canvas.height = document.body.clientHeight;
 	return canvas.getContext("2d");
@@ -19,7 +20,7 @@ function initCanvas() {
 
 function startGame() {
     actors = [];
-    gameState = "playing"
+    gameState = "playing";
     lives = 3;
     createShip();
     numRocks = 4;

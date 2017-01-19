@@ -49,8 +49,7 @@ function polygon(points, color, blurCount, strokeStyle) {
 			
 		});
 
-		var box = [[minX,minY], [maxX,minY], [maxX,maxY], [minX,maxY]];
-		return box;
+        return [[minX, minY], [maxX, minY], [maxX, maxY], [minX, maxY]];
 	}
 
 }
@@ -64,8 +63,8 @@ function scalePoint(point, scale) {
 
 function rotatePoint(point, angle) {
 	var newPoint = [];
-    cosVal = Math.cos(degreesToRadians(angle));
-    sinVal = Math.sin(degreesToRadians(angle));
+    var cosVal = Math.cos(degreesToRadians(angle));
+    var sinVal = Math.sin(degreesToRadians(angle));
     newPoint.push(point[0] * cosVal + point[1] * sinVal);
     newPoint.push(point[1] * cosVal - point[0] * sinVal);
 
