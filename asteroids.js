@@ -30,14 +30,14 @@ function startGame() {
 
 function createRocks() {
 	for (var i = 0; i < numRocks; i++) {
-		var rock = new rockSprite(0, 0, 0);
+		var rock = new RockSprite(0, 0, 0);
 		actors.push(rock);
 	}
 }
 
 function createShip() {
     keyPressed = {};
-	ship = new shipSprite(canvas.width / 2, canvas.height / 2);
+	ship = new ShipSprite(canvas.width / 2, canvas.height / 2);
 	actors.push(ship);
 }
 

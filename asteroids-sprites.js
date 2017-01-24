@@ -1,5 +1,5 @@
 // The sprite handle (x,y) is at the center of the sprite
-function sprite(x, y, vx, vy, polygon) {
+function Sprite(x, y, vx, vy, polygon) {
 	this.x = x;
 	this.y = y;
 	this.vx = vx;
@@ -38,19 +38,18 @@ function spritesCollide(sprite1, sprite2) {
 			 sprite2.y + polygon2.boundingBox()[2][1] < sprite1.y + polygon1.boundingBox()[0][1]);
 }
 
-function shipSprite(x, y) {
+function ShipSprite(x, y) {
 	this.name = "ship";
 	this.origPoints = [ [ 0, -10 ], [ 6, 10 ], [ 3, 7 ], [ -3, 7 ], [ -6, 10 ], [ 0, -10 ] ];
 	this.angle = 0;
 	this.acceleration = 0.3;
-	this.decelaration= -0.005;
 	this.maxVelocity = 150;
 	this.color = '#0000ff';
 	this.blurCount = 8;
 	this.angleIncrement = 5.0;
 	this.missileCount = 0;
 	this.missiles = [];
-	this.sprite = new sprite(x, y, 0.0, 0.0, new polygon(this.origPoints, this.color, this.blurCount, "#ffffff"));
+	this.sprite = new Sprite(x, y, 0.0, 0.0, new Polygon(this.origPoints, this.color, this.blurCount, "#ffffff"));
 	
 	this.rotate = function (direction) {
 		this.angle += this.angleIncrement * direction;
@@ -72,7 +71,7 @@ function shipSprite(x, y) {
 	
 	this.fire = function () {
 		if (this.missiles.length <= 3) {
-			missile = new missileSprite(this.sprite.x, this.sprite.y, this.angle, this);	
+			missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this);
 			missile.move();
 			actors.push(missile);
 			this.missiles.push(missile);
@@ -85,7 +84,7 @@ function shipSprite(x, y) {
 	}
 }
 
-function missileSprite(x, y, angle, ship) {
+function MissileSprite(x, y, angle, ship) {
 	this.name = "missile";
 	var size = 1;
 	this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
@@ -98,7 +97,7 @@ function missileSprite(x, y, angle, ship) {
 	var vx = vel * Math.sin(degreesToRadians(angle));
 	var vy = vel * Math.cos(degreesToRadians(angle));
 	
-	this.sprite = new sprite(x, y, vx, vy, new polygon(this.missilePoints, this.color, this.blurCount, this.color));
+	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, this.color, this.blurCount, this.color));
 
 	this.move = function() {
 		this.ttl--;
@@ -119,7 +118,7 @@ function missileSprite(x, y, angle, ship) {
 }
 
 var rockType = 1;
-function rockSprite(x, y, sizeIndex) {
+function RockSprite(x, y, sizeIndex) {
 	var rockPointsType1 = [ [ -4, -12 ], [ 6, -12 ], [ 13, -4 ], [ 13, 5 ],
 			[ 6, 13 ], [ 0, 13 ], [ 0, 4 ], [ -8, 13 ], [ -15, 4 ], [ -7, 1 ],
 			[ -15, -3 ]];
@@ -153,7 +152,7 @@ function rockSprite(x, y, sizeIndex) {
 	
 	var vx = (Math.random() * (velocities[sizeIndex] * 2)) - velocities[sizeIndex];
 	var vy = (Math.random() * (velocities[sizeIndex] * 2)) - velocities[sizeIndex];
-	this.sprite = new sprite(x, y, vx, vy, new polygon(points, colours[sizeIndex], this.blurCount, colours[sizeIndex]));
+	this.sprite = new Sprite(x, y, vx, vy, new Polygon(points, colours[sizeIndex], this.blurCount, colours[sizeIndex]));
 
 	if (++rockType > 3) {
 		rockType = 0;
@@ -164,7 +163,7 @@ function rockSprite(x, y, sizeIndex) {
 	}
 }
 
-function debrisSprite(x, y) {
+function DebrisSprite(x, y) {
 	this.name = "debris";
 	var size = 1;
 	this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
@@ -174,7 +173,7 @@ function debrisSprite(x, y) {
 
 	var vx = (0.5 - Math.random()) * 10;
 	var vy = (0.5 - Math.random()) * 10;
-	this.sprite = new sprite(x, y, vx, vy, new polygon(this.missilePoints, this.color, this.blurCount, this.color));
+	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, this.color, this.blurCount, this.color));
 
 	this.move = function() {
 		this.ttl--;

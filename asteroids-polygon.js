@@ -19,7 +19,7 @@ function drawPolygon(polygon, x, y) {
 
 }
 
-function polygon(points, color, blurCount, strokeStyle) {
+function Polygon(points, color, blurCount, strokeStyle) {
 	this.points = points;
 	this.color = color;
 	this.blurCount = blurCount;

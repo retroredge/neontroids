@@ -72,7 +72,7 @@ function doRockHit(rock) {
 
     if (newRockSize != null) {
         for (var i = 0; i < 2; i++) {
-            var newRock = new rockSprite(rock.sprite.x, rock.sprite.y, newRockSize);
+            var newRock = new RockSprite(rock.sprite.x, rock.sprite.y, newRockSize);
             actors.push(newRock);
         }
     }
@@ -80,7 +80,7 @@ function doRockHit(rock) {
 
 function addDebris(x, y) {
     for (var i=0; i<25; i++) {
-        var debris = new debrisSprite(x, y);
+        var debris = new DebrisSprite(x, y);
         actors.push(debris);
     }
 }
