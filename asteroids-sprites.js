@@ -71,7 +71,7 @@ function ShipSprite(x, y) {
 	
 	this.fire = function () {
 		if (this.missiles.length <= 3) {
-			missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this);
+			var missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this);
 			missile.move();
 			actors.push(missile);
 			this.missiles.push(missile);
