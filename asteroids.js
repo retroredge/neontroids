@@ -5,6 +5,7 @@ var lives = 0;
 var gameState = "attract";
 var numRocks = 4;
 var score = 0;
+var highScore = 0;
 var canvas;
 
 createRocks();

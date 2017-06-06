@@ -19,7 +19,7 @@ function displayFps() {
  	ctx.font = "8px Arial";
  	var text = frameRate + " fps";
     var textWidth = ctx.measureText(text).width;
-  	ctx.fillText(text, (canvas.width / 2) - textWidth/2, 10);
+  	ctx.fillText(text, (canvas.width / 2) - textWidth/2, canvas.height);
 	oldTime  = Date.now();
 	frameCount++;
 }
@@ -53,6 +53,10 @@ function displayScore() {
         ctx.font = "18px Verdana";
         var text = "Score: " + score;
         ctx.fillText(text, 5, 18);
+
+        text = "High Score: " + highScore;
+        var textWidth = ctx.measureText(text).width;
+        ctx.fillText(text, (canvas.width / 2) - textWidth/2, 18);
 }
 
 function displayLives() {

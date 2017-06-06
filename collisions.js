@@ -21,6 +21,9 @@ function checkCollisions() {
                 gameState = 'playing';
                 if (lives == 0) {
                     gameState = "attract";
+                    if (score > highScore) {
+                        highScore = score;
+                    }
                 } else {
                     createShip();
                 }
