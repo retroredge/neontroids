@@ -44,12 +44,11 @@ function ShipSprite(x, y) {
 	this.angle = 0;
 	this.acceleration = 0.3;
 	this.maxVelocity = 150;
-	this.color = '#0000ff';
 	this.blurCount = 8;
 	this.angleIncrement = 5.0;
 	this.missileCount = 0;
 	this.missiles = [];
-	this.sprite = new Sprite(x, y, 0.0, 0.0, new Polygon(this.origPoints, this.color, this.blurCount, "#ffffff"));
+	this.sprite = new Sprite(x, y, 0.0, 0.0, new Polygon(this.origPoints, '#0000ff', this.blurCount, '#ffffff'));
 	
 	this.rotate = function (direction) {
 		this.angle += this.angleIncrement * direction;
@@ -88,7 +87,6 @@ function MissileSprite(x, y, angle, ship) {
 	this.name = "missile";
 	var size = 1;
 	this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
-	this.color = '#ffff00';
 	this.blurCount = 2;
 	this.ttl = 50;
 	this.ship = ship;
@@ -97,7 +95,7 @@ function MissileSprite(x, y, angle, ship) {
 	var vx = vel * Math.sin(degreesToRadians(angle));
 	var vy = vel * Math.cos(degreesToRadians(angle));
 	
-	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, this.color, this.blurCount, this.color));
+	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, '#ffff00', this.blurCount, '#ffff00'));
 
 	this.move = function() {
 		this.ttl--;
@@ -170,18 +168,18 @@ function DebrisSprite(x, y) {
 	this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
 	this.blurCount = 2;
 	this.ttl = 50;
+	this.redValue = 255;
 	this.ship = ship;
 
-	var vx = (0.5 - Math.random()) * 10;
-	var vy = (0.5 - Math.random()) * 10;
-	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, this.color, this.blurCount, this.color));
+	var vel = 10;
+	var vx = (0.5 - Math.random()) * vel;
+	var vy = (0.5 - Math.random()) * vel;
+	this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, '#ff0000', this.blurCount, '#ff0000'));
 
 	this.move = function() {
 		this.ttl--;
-		var redValue = this.ttl + 205;
-		var newColor = "rgb(" + redValue + ", 0, 0)";
-        this.sprite.polygon.color = newColor;
-        this.sprite.polygon.strokeStyle = newColor;
+        this.redValue -= 4;
+        this.sprite.polygon.strokeStyle = "rgb(" + this.redValue + ", 0, 0)";
 		this.sprite.move();
 		if (this.ttl < 0) {
 			var i = actors.indexOf(this);

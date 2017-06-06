@@ -81,7 +81,7 @@ function doRockHit(rock) {
 }
 
 function addDebris(x, y) {
-    for (var i=0; i<25; i++) {
+    for (var i=0; i<20; i++) {
         var debris = new DebrisSprite(x, y);
         actors.push(debris);
     }
