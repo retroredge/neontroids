@@ -35,7 +35,7 @@ function checkRockCollisions(rock) {
     if (gameState === "playing") {
         var rockHit = false;
         var shipHit = false;
-        ship.missiles.forEach(function(missile) {
+        ship.missiles.forEach(function (missile) {
             if (missile.sprite.collidesWith(rock.sprite)) {
                 removeSprite(actors, missile);
                 removeSprite(ship.missiles, missile);
@@ -81,7 +81,7 @@ function doRockHit(rock) {
 }
 
 function addDebris(x, y) {
-    for (var i=0; i<20; i++) {
+    for (var i = 0; i < 20; i++) {
         var debris = new DebrisSprite(x, y);
         actors.push(debris);
     }
@@ -96,9 +96,9 @@ function doShipHit() {
 }
 
 function removeSprite(collection, actor) {
-	var i = collection.indexOf(actor);
-	if (i !== -1) {
-		collection.splice(i, 1);
-	}
+    var i = collection.indexOf(actor);
+    if (i !== -1) {
+        collection.splice(i, 1);
+    }
 
 }

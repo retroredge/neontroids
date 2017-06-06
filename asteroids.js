@@ -14,10 +14,10 @@ initKeyboard();
 runGame();
 
 function initCanvas() {
-	canvas = document.getElementById("canvas");
-	canvas.width = document.body.clientWidth;
-	canvas.height = document.body.clientHeight;
-	return canvas.getContext("2d");
+    canvas = document.getElementById("canvas");
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    return canvas.getContext("2d");
 }
 
 function startGame() {
@@ -32,37 +32,37 @@ function startGame() {
 }
 
 function createRocks() {
-	for (var i = 0; i < numRocks; i++) {
-		var rock = new RockSprite(0, 0, 0);
-		actors.push(rock);
-	}
+    for (var i = 0; i < numRocks; i++) {
+        var rock = new RockSprite(0, 0, 0);
+        actors.push(rock);
+    }
 }
 
 function createShip() {
     keyPressed = {};
-	ship = new ShipSprite(canvas.width / 2, canvas.height / 2);
-	actors.push(ship);
+    ship = new ShipSprite(canvas.width / 2, canvas.height / 2);
+    actors.push(ship);
 }
 
 function runGame() {
-	requestAnimationFrame(runGame);
-	clearScreen();
-	checkKeyboardInput();
-	moveAndRenderActors();
-	checkCollisions();
-	displayText();
+    requestAnimationFrame(runGame);
+    clearScreen();
+    checkKeyboardInput();
+    moveAndRenderActors();
+    checkCollisions();
+    displayText();
 }
 
 function clearScreen() {
-	ctx.color = "black";
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.color = "black";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function moveAndRenderActors() {
-	actors.forEach(function(actor) {
-		actor.move();
-		drawPolygon(actor.sprite.polygon, actor.sprite.x, actor.sprite.y);
-	});
+    actors.forEach(function (actor) {
+        actor.move();
+        drawPolygon(actor.sprite.polygon, actor.sprite.x, actor.sprite.y);
+    });
 }
 
 function levelUp() {

@@ -1,6 +1,6 @@
 function drawPolygon(polygon, x, y) {
 	ctx.strokeStyle = polygon.strokeStyle;
-	ctx.shadowColor = polygon.color;
+    ctx.shadowColor = polygon.color;
 	ctx.lineWidth = 2;
 	ctx.shadowBlur = 10;	
 	
