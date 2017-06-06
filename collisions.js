@@ -1,6 +1,5 @@
 var explodingCount = 0;
 function checkCollisions() {
-
     if (gameState !== "attract") {
         var foundARock = false;
         for (var i = actors.length - 1; i >= 0; i--) {

@@ -7,6 +7,7 @@ var numRocks = 4;
 var score = 0;
 var highScore = 0;
 var canvas;
+var level = 1;
 
 createRocks();
 initKeyboard();
@@ -23,10 +24,11 @@ function startGame() {
     actors = [];
     gameState = "playing";
     lives = 3;
-    createShip();
     numRocks = 4;
-    createRocks();
     score = 0;
+    level = 1;
+    createShip();
+    createRocks();
 }
 
 function createRocks() {
@@ -65,5 +67,6 @@ function moveAndRenderActors() {
 
 function levelUp() {
     numRocks++;
+    level++;
     createRocks();
 }

@@ -149,9 +149,10 @@ function RockSprite(x, y, sizeIndex) {
 	var points = rockTypes[rockType].map(function(polygonPoint) {
 		return scalePoint(polygonPoint, rockRef.scale);
 	});
-	
-	var vx = (Math.random() * (velocities[sizeIndex] * 2)) - velocities[sizeIndex];
-	var vy = (Math.random() * (velocities[sizeIndex] * 2)) - velocities[sizeIndex];
+
+	var velocity = velocities[sizeIndex] + (level/5);
+	var vx = (Math.random() * (velocity * 2)) - velocity;
+	var vy = (Math.random() * (velocity * 2)) - velocity;
 	this.sprite = new Sprite(x, y, vx, vy, new Polygon(points, colours[sizeIndex], this.blurCount, colours[sizeIndex]));
 
 	if (++rockType > 3) {
