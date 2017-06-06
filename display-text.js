@@ -25,7 +25,7 @@ function displayFps() {
 }
 
 function displayAttractMessage() {
-    if (gameState == "attract") {
+    if (gameState === "attract") {
         setColor();
         ctx.fillStyle = "blue";
         ctx.font = "40px Verdana";

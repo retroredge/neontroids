@@ -104,13 +104,13 @@ function MissileSprite(x, y, angle, ship) {
 		this.sprite.move();
 		if (this.ttl < 0) {
 			var i = actors.indexOf(this);
-			if (i != -1) {
+			if (i !== -1) {
 				actors.splice(i, 1);
 				this.ship.missileCount--;
 			}
 			
 			i = this.ship.missiles.indexOf(this);
-			if (i != -1) {
+			if (i !== -1) {
 				this.ship.missiles.splice(i, 1);
 			}
 		}
@@ -184,7 +184,7 @@ function DebrisSprite(x, y) {
 		this.sprite.move();
 		if (this.ttl < 0) {
 			var i = actors.indexOf(this);
-			if (i != -1) {
+			if (i !== -1) {
 				actors.splice(i, 1);
 			}
 		}
