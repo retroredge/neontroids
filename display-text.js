@@ -26,7 +26,7 @@ function displayFps() {
 
 function displayAttractMessage() {
     if (gameState === "attract") {
-        setColor();
+        setColor('white');
         ctx.fillStyle = "blue";
         ctx.font = "40px Verdana";
         var text = "Neontroids";
@@ -49,24 +49,25 @@ function displayAttractMessage() {
 }
 
 function displayScore() {
-        setColor();
+        setColor('yellow');
         ctx.font = "18px Verdana";
         var text = "Score: " + score;
         ctx.fillText(text, 5, 18);
 
+        setColor('aqua');
         text = "High Score: " + highScore;
         var textWidth = ctx.measureText(text).width;
         ctx.fillText(text, (canvas.width / 2) - textWidth/2, 18);
 }
 
 function displayLives() {
-        setColor();
+        setColor('fuchsia');
         ctx.font = "18px Verdana";
         var text = "Lives: " + lives;
         ctx.fillText(text, canvas.width - ctx.measureText(text).width - 5, 18);
 }
 
-function setColor() {
-    ctx.fillStyle = "white";
+function setColor(color) {
+    ctx.fillStyle = color;
     ctx.shadowColor = "#0000ff";
 }
