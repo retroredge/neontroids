@@ -5,18 +5,26 @@ function initKeyboard() {
         keyPressed[event.keyCode] = true;
     }, true);
 
-    addEventListener('keyup', function (event) {
+    document.addEventListener('keyup', function (event) {
         if (gameState === "playing") {
             keyPressed[event.keyCode] = false;
 
 			if ((event.keyCode === 78) || (event.keyCode === 32)) {
 				ship.fire();
 			}
-		}
+		} else if (gameState === "attract") {
+            startGame();
+        }
 	}, true);
 
-    window.addEventListener('blur', function () {
+    document.addEventListener('blur', function () {
         keyPressed = {};
+    });
+
+    document.addEventListener('click', function (event) {
+        if (gameState === "attract") {
+            startGame();
+        }
     });
 }
 
@@ -32,10 +40,6 @@ function checkKeyboardInput() {
 
         if (keyPressed["38"] || keyPressed["77"]) {
             ship.thrust();
-        }
-    } else if (gameState === "attract") {
-        if (keyPressed["13"]) {
-            startGame();
         }
     }
 }

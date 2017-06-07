@@ -34,7 +34,7 @@ function displayAttractMessage() {
 
         ctx.fillStyle = "yellow";
         ctx.font = "25px Verdana";
-        var text2 = "Press Enter to Play";
+        var text2 = "Click the mouse or press any key to play";
         ctx.fillText(text2, (canvas.width / 2) - ctx.measureText(text2).width / 2, (canvas.height / 2));
 
         ctx.fillStyle = "#cccccc";
