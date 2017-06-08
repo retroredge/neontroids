@@ -8,6 +8,7 @@ var score = 0;
 var highScore = 0;
 var canvas;
 var level = 1;
+var saucer;
 
 createRocks();
 initKeyboard();
@@ -27,6 +28,7 @@ function startGame() {
     numRocks = 4;
     score = 0;
     level = 1;
+    saucer = null;
     createShip();
     createRocks();
 }
@@ -44,13 +46,23 @@ function createShip() {
     actors.push(ship);
 }
 
+function createSaucer() {
+    if ((totalFrameCount % 1200 === 0) && (!saucer) && (gameState === 'playing')) {
+        var size = level === 1 ? 0 : Math.random() < 0.80 ? 0 : 1;
+        saucer = new Saucer(0, Math.random() * canvas.height, size);
+        actors.push(saucer);
+    }
+}
+
 function runGame() {
     requestAnimationFrame(runGame);
     clearScreen();
     checkKeyboardInput();
     moveAndRenderActors();
     checkCollisions();
+    checkForEndOfGame();
     displayText();
+    createSaucer();
 }
 
 function clearScreen() {
@@ -69,4 +81,21 @@ function levelUp() {
     numRocks++;
     level++;
     createRocks();
+}
+
+function checkForEndOfGame() {
+    if (gameState === "exploding") {
+        explodingCount += 1;
+        if (explodingCount > 150) {
+            gameState = 'playing';
+            if (lives === 0) {
+                gameState = "attract";
+                if (score > highScore) {
+                    highScore = score;
+                }
+            } else {
+                createShip();
+            }
+        }
+    }
 }

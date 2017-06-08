@@ -5,7 +5,7 @@ function displayText() {
     displayLives();
 }
 
-var frameCount = 0, frameRate = 0, elapsedTime = 0, oldTime = Date.now();
+var frameCount = 0, frameRate = 0, elapsedTime = 0, oldTime = Date.now(), totalFrameCount = 0;
 function displayFps() {
 
     elapsedTime += Date.now() - oldTime;
@@ -22,6 +22,7 @@ function displayFps() {
     ctx.fillText(text, (canvas.width / 2) - textWidth / 2, canvas.height);
     oldTime = Date.now();
     frameCount++;
+    totalFrameCount++;
 }
 
 function displayAttractMessage() {

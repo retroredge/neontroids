@@ -46,8 +46,8 @@ function ShipSprite(x, y) {
     this.maxVelocity = 150;
     this.blurCount = 8;
     this.angleIncrement = 5.0;
-    this.missileCount = 0;
     this.missiles = [];
+    this.missileTtl = 50;
     this.sprite = new Sprite(x, y, 0.0, 0.0, new Polygon(this.origPoints, '#0000ff', this.blurCount, '#ffffff'));
 
     this.rotate = function (direction) {
@@ -70,11 +70,10 @@ function ShipSprite(x, y) {
 
     this.fire = function () {
         if (this.missiles.length <= 3) {
-            var missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this);
+            var missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this, -13, this.missileTtl);
             missile.move();
             actors.push(missile);
             this.missiles.push(missile);
-            this.missileCount++;
         }
     };
 
@@ -83,15 +82,13 @@ function ShipSprite(x, y) {
     }
 }
 
-function MissileSprite(x, y, angle, ship) {
+function MissileSprite(x, y, angle, ship, vel, ttl) {
     this.name = "missile";
-    var size = 1;
-    this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
+    this.missilePoints = [[0, -1], [1, 0], [-1, 0]];
     this.blurCount = 2;
-    this.ttl = 50;
+    this.ttl = ttl;
     this.ship = ship;
 
-    var vel = -13.0;
     var vx = vel * Math.sin(degreesToRadians(angle));
     var vy = vel * Math.cos(degreesToRadians(angle));
 
@@ -104,7 +101,6 @@ function MissileSprite(x, y, angle, ship) {
             var i = actors.indexOf(this);
             if (i !== -1) {
                 actors.splice(i, 1);
-                this.ship.missileCount--;
             }
 
             i = this.ship.missiles.indexOf(this);
@@ -164,8 +160,7 @@ function RockSprite(x, y, sizeIndex) {
 
 function DebrisSprite(x, y) {
     this.name = "debris";
-    var size = 1;
-    this.missilePoints = [[0, -size], [size, 0], [-size, 0]];
+    this.points = [[0, -1], [1, 0], [-1, 0]];
     this.blurCount = 2;
     this.ttl = 50;
     this.redValue = 255;
@@ -174,7 +169,7 @@ function DebrisSprite(x, y) {
     var vel = 10;
     var vx = (0.5 - Math.random()) * vel;
     var vy = (0.5 - Math.random()) * vel;
-    this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.missilePoints, '#ff0000', this.blurCount, '#ff0000'));
+    this.sprite = new Sprite(x, y, vx, vy, new Polygon(this.points, '#ff0000', this.blurCount, '#ff0000'));
 
     this.move = function () {
         this.ttl--;
@@ -188,4 +183,52 @@ function DebrisSprite(x, y) {
             }
         }
     }
+}
+
+function Saucer(x, y, sizeIndex) {
+    var velocities = [2.7, 4.0];
+    var scales = [2, 1.2];
+    var scores = [500 + (level * 10), 1000 + (level * 100)];
+    var colours = ['#ffff00', '#9370DB'];
+    var blurCounts = [2, 2];
+    var missileVelocities = [5 + (level/2), 7 + (level/2)];
+    var missileTtls = [100, 120];
+
+    this.sizeIndex = sizeIndex;
+    this.scale = scales[sizeIndex];
+    this.blurCount = blurCounts[sizeIndex];
+    this.name = "saucer";
+    this.points = [[-9, 0], [-3, -3], [-2, -6], [-2, -6], [2, -6], [3, -3], [9, 0], [-9, 0], [-3, 4], [3, 4], [9, 0]];
+    this.missiles = [];
+    this.score = scores[sizeIndex];
+    this.missileTtl = missileTtls[sizeIndex];
+    this.missileVelocity = missileVelocities[sizeIndex];
+
+    var vel = velocities[sizeIndex];
+    var vx = vel * Math.sin(degreesToRadians(Math.random() * 360));
+    var vy = vel * Math.cos(degreesToRadians(Math.random() * 360));
+    var saucerRef = this;
+    var points = this.points.map(function (polygonPoint) {
+        return scalePoint(polygonPoint, saucerRef.scale);
+    });
+
+    this.sprite = new Sprite(x, y, vx, vy, new Polygon(points, colours[sizeIndex], this.blurCount, colours[sizeIndex]));
+
+    this.move = function () {
+        this.fire();
+        this.sprite.move();
+    };
+
+    this.fire = function () {
+        if ((this.missiles.length === 0) && (gameState === "playing")) {
+            var dx = ship.sprite.x - this.sprite.x;
+            var dy = ship.sprite.y - this.sprite.y;
+            var angle = Math.atan2(dx, dy) * (180/Math.PI);
+            var missile = new MissileSprite(this.sprite.x, this.sprite.y, angle, this, this.missileVelocity, this.missileTtl);
+            missile.move();
+            actors.push(missile);
+            this.missiles.push(missile);
+        }
+    };
+
 }
