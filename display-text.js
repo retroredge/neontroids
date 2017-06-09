@@ -28,24 +28,29 @@ function displayFps() {
 function displayAttractMessage() {
     if (gameState === "attract") {
         setColor('white');
-        ctx.fillStyle = "blue";
-        ctx.font = "40px Verdana";
+        ctx.fillStyle = "#DDDDFF";
+        ctx.font = "100px Verdana";
         var text = "Neontroids";
-        ctx.fillText(text, (canvas.width / 2) - ctx.measureText(text).width / 2, canvas.height / 2 - 50);
+        ctx.shadowColor = '#0000FF';
+
+        for (var j = 1; j < 6; j++) {
+            ctx.shadowBlur = j * 27;
+            ctx.fillText(text, (canvas.width / 2) - ctx.measureText(text).width / 2, canvas.height / 2 - 50);
+        }
 
         ctx.fillStyle = "yellow";
         ctx.font = "25px Verdana";
         var text2 = "Click the mouse or press any key to play";
-        ctx.fillText(text2, (canvas.width / 2) - ctx.measureText(text2).width / 2, (canvas.height / 2));
+        ctx.fillText(text2, (canvas.width / 2) - ctx.measureText(text2).width / 2, (canvas.height / 2) + 20);
 
         ctx.fillStyle = "#cccccc";
         ctx.font = "15px Verdana";
         var text3 = "Cursor keys to move, Space to fire";
-        ctx.fillText(text3, (canvas.width / 2) - ctx.measureText(text3).width / 2, (canvas.height / 2) + 30);
+        ctx.fillText(text3, (canvas.width / 2) - ctx.measureText(text3).width / 2, (canvas.height / 2) + 60);
 
         ctx.font = "15px Verdana";
         var text4 = "or Z & X to rotate, N fire, M thrust";
-        ctx.fillText(text4, (canvas.width / 2) - ctx.measureText(text4).width / 2, (canvas.height / 2) + 60);
+        ctx.fillText(text4, (canvas.width / 2) - ctx.measureText(text4).width / 2, (canvas.height / 2) + 80);
     }
 }
 

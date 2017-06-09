@@ -3,7 +3,7 @@ var actors = [];
 var ship;
 var lives = 0;
 var gameState = "attract";
-var numRocks = 4;
+var numRocks = 2;
 var score = 0;
 var highScore = 0;
 var canvas;
