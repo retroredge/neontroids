@@ -1,3 +1,7 @@
+var actors = [];
+var ship;
+var saucer;
+
 // The sprite handle (x,y) is at the center of the sprite
 function Sprite(x, y, vx, vy, polygon) {
     this.x = x;
@@ -130,7 +134,7 @@ function RockSprite(x, y, sizeIndex) {
         [-15, -5], [-5, -5]];
 
     var rockTypes = [rockPointsType1, rockPointsType2, rockPointsType3, rockPointsType4];
-    var velocities = [1.5, 4.0, 6.0];
+        var velocities = [1.5, 3.0, 4.5];
     var scales = [2.5, 1.5, 0.6];
     var colours = ['#00ff00', '#00ff00', '#00ff00'];
     var blurCounts = [3, 3, 2];

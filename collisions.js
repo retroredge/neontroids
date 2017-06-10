@@ -1,4 +1,3 @@
-var explodingCount = 0;
 function checkCollisions() {
     if (gameState !== 'attract') {
         var foundARock = false;
@@ -14,8 +13,8 @@ function checkCollisions() {
             levelUp();
         }
 
-        checkSaucerCollisions();
     }
+    checkSaucerCollisions();
 }
 
 function checkRockCollisions(rock) {

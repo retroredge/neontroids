@@ -1,3 +1,9 @@
+var frameCount = 0;
+var frameRate = 0;
+var elapsedTime = 0;
+var oldTime = Date.now();
+var totalFrameCount = 0;
+
 function displayText() {
     displayFps();
     displayAttractMessage();
@@ -5,9 +11,7 @@ function displayText() {
     displayLives();
 }
 
-var frameCount = 0, frameRate = 0, elapsedTime = 0, oldTime = Date.now(), totalFrameCount = 0;
 function displayFps() {
-
     elapsedTime += Date.now() - oldTime;
     if (elapsedTime > 1000) {
         elapsedTime = 0;

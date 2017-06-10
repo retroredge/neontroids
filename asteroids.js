@@ -1,14 +1,12 @@
 var ctx = initCanvas();
-var actors = [];
-var ship;
+var canvas;
 var lives = 0;
 var gameState = "attract";
-var numRocks = 2;
 var score = 0;
 var highScore = 0;
-var canvas;
 var level = 1;
-var saucer;
+var numRocks = 2;
+var explodingCount = 0;
 
 createRocks();
 initKeyboard();
@@ -31,6 +29,7 @@ function startGame() {
     saucer = null;
     createShip();
     createRocks();
+    totalFrameCount = 0
 }
 
 function createRocks() {
@@ -88,14 +87,15 @@ function checkForEndOfGame() {
         explodingCount += 1;
         if (explodingCount > 150) {
             gameState = 'playing';
-            if (lives === 0) {
-                gameState = "attract";
-                if (score > highScore) {
-                    highScore = score;
-                }
-            } else {
-                createShip();
-            }
+            createShip();
+        }
+    }
+
+    if ((gameState === 'playing') && (lives <= 0)) {
+        gameState = "attract";
+        removeSprite(actors, ship);
+        if (score > highScore) {
+            highScore = score;
         }
     }
 }
