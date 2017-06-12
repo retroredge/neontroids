@@ -8,9 +8,17 @@ var level = 1;
 var numRocks = 2;
 var explodingCount = 0;
 
+initHighScore();
 createRocks();
 initKeyboard();
 runGame();
+
+function initHighScore() {
+    var previousHighScore = window.localStorage.getItem('neontroids.highscore');
+    if (previousHighScore) {
+        highScore = previousHighScore;
+    }
+}
 
 function initCanvas() {
     canvas = document.getElementById("canvas");
@@ -96,6 +104,7 @@ function checkForEndOfGame() {
         removeSprite(actors, ship);
         if (score > highScore) {
             highScore = score;
+            window.localStorage.setItem('neontroids.highscore', highScore);
         }
     }
 }
