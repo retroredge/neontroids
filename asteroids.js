@@ -7,6 +7,9 @@ var highScore = 0;
 var level = 1;
 var numRocks = 2;
 var explodingCount = 0;
+var thumpLow;
+var thumpDelay = 1000;
+var timer;
 
 initHighScore();
 createRocks();
@@ -37,7 +40,22 @@ function startGame() {
     saucer = null;
     createShip();
     createRocks();
-    totalFrameCount = 0
+    totalFrameCount = 0;
+    thumpLow = true;
+    playThumps();
+}
+
+function playThumps() {
+    timer = setTimeout(function () {
+        thumpLow ? playSound('thumpLow') : playSound('thumpHigh');
+        thumpLow = !thumpLow;
+        thumpDelay -= 15;
+        console.log(thumpDelay);
+        if (thumpDelay < 200) {
+            thumpDelay = 200;
+        }
+        playThumps();
+    }, thumpDelay);
 }
 
 function createRocks() {
@@ -56,6 +74,7 @@ function createShip() {
 function createSaucer() {
     if ((totalFrameCount % 1200 === 0) && (!saucer) && (gameState === 'playing')) {
         var size = level === 1 ? 0 : Math.random() < 0.80 ? 0 : 1;
+        size === 0 ? startSound('largeSaucer') : startSound('smallSaucer');
         saucer = new Saucer(0, Math.random() * canvas.height, size);
         actors.push(saucer);
     }
@@ -88,6 +107,7 @@ function levelUp() {
     numRocks++;
     level++;
     createRocks();
+    thumpDelay = 1000;
 }
 
 function checkForEndOfGame() {
@@ -100,6 +120,7 @@ function checkForEndOfGame() {
     }
 
     if ((gameState === 'playing') && (lives <= 0)) {
+        clearTimeout(timer);
         gameState = "attract";
         removeSprite(actors, ship);
         if (score > highScore) {

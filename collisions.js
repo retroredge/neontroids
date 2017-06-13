@@ -114,6 +114,7 @@ function removeSprite(collection, actor) {
 }
 
 function saucerHit() {
+    saucer.sizeIndex === 0 ? stopSound('largeSaucer') : stopSound('smallSaucer');
     playSound('explosion2');
     removeSprite(actors, saucer);
     addDebris(saucer.sprite.x, saucer.sprite.y);
