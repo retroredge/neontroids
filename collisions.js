@@ -70,12 +70,15 @@ function rockHit(rock) {
     addDebris(rock.sprite.x, rock.sprite.y);
     var newRockSize = null;
     if (rock.sizeIndex === 0) {
+        playSound('explosion1');
         newRockSize = 1;
         score += 50;
     } else if (rock.sizeIndex === 1) {
+        playSound('explosion2');
         newRockSize = 2;
         score += 100;
     } else {
+        playSound('explosion3');
         score += 200;
     }
 
@@ -95,6 +98,7 @@ function addDebris(x, y) {
 }
 
 function shipHit() {
+    playSound('explosion2');
     removeSprite(actors, ship);
     addDebris(ship.sprite.x, ship.sprite.y);
     lives--;
@@ -110,6 +114,7 @@ function removeSprite(collection, actor) {
 }
 
 function saucerHit() {
+    playSound('explosion2');
     removeSprite(actors, saucer);
     addDebris(saucer.sprite.x, saucer.sprite.y);
     saucer = null;

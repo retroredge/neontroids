@@ -74,6 +74,7 @@ function ShipSprite(x, y) {
 
     this.fire = function () {
         if (this.missiles.length <= 3) {
+            playSound('shipMissile');
             var missile = new MissileSprite(this.sprite.x, this.sprite.y, this.angle, this, -13, this.missileTtl);
             missile.move();
             actors.push(missile);
@@ -225,6 +226,7 @@ function Saucer(x, y, sizeIndex) {
 
     this.fire = function () {
         if ((this.missiles.length === 0) && (gameState === "playing")) {
+            playSound('saucerMissile');
             var dx = ship.sprite.x - this.sprite.x;
             var dy = ship.sprite.y - this.sprite.y;
             var angle = Math.atan2(dx, dy) * (180/Math.PI);
