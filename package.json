@@ -1,0 +1,19 @@
+{
+  "name": "neontroids",
+  "version": "1.0.0",
+  "description": "A Javascript version of Atari's 1979 classic Asteroids arcade game.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/retroredge/neontroids.git"
+  },
+  "author": "Nick Redshaw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/retroredge/neontroids/issues"
+  },
+  "homepage": "https://github.com/retroredge/neontroids#readme"
+}
