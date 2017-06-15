@@ -46,10 +46,10 @@ function ShipSprite(x, y) {
     this.name = "ship";
     this.origPoints = [[0, -10], [6, 10], [3, 7], [-3, 7], [-6, 10], [0, -10]];
     this.angle = 0;
-    this.acceleration = 0.3;
+    this.acceleration = 0.2;
     this.maxVelocity = 150;
     this.blurCount = 8;
-    this.angleIncrement = 5.0;
+    this.angleIncrement = 4.0;
     this.missiles = [];
     this.missileTtl = 50;
     this.sprite = new Sprite(x, y, 0.0, 0.0, new Polygon(this.origPoints, '#0000ff', this.blurCount, '#ffffff'));

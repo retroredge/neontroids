@@ -34,7 +34,7 @@ function startGame() {
     actors = [];
     gameState = "playing";
     lives = 3;
-    numRocks = 4;
+    numRocks = 3;
     score = 0;
     level = 1;
     saucer = null;
@@ -49,7 +49,7 @@ function playThumps() {
     timer = setTimeout(function () {
         thumpLow ? playSound('thumpLow') : playSound('thumpHigh');
         thumpLow = !thumpLow;
-        thumpDelay -= 15;
+        thumpDelay -= 7;
         if (thumpDelay < 200) {
             thumpDelay = 200;
         }
@@ -120,8 +120,13 @@ function checkForEndOfGame() {
 
     if ((gameState === 'playing') && (lives <= 0)) {
         clearTimeout(timer);
+        if (saucer) {
+            saucer.sizeIndex === 0 ? stopSound('largeSaucer') : stopSound('smallSaucer');
+        }
         gameState = "attract";
         removeSprite(actors, ship);
+        removeSprite(actors, saucer);
+        thumpDelay = 1000;
         if (score > highScore) {
             highScore = score;
             window.localStorage.setItem('neontroids.highscore', highScore);
