@@ -79,8 +79,13 @@ function createSaucer() {
     }
 }
 
-function runGame() {
+var lastFrameTime = 0;
+var frameInterval = 1000 / 60;
+
+function runGame(timestamp) {
     requestAnimationFrame(runGame);
+    if (timestamp - lastFrameTime < frameInterval) return;
+    lastFrameTime += frameInterval;
     clearScreen();
     checkKeyboardInput();
     moveAndRenderActors();

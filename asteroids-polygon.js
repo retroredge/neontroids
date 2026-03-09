@@ -24,34 +24,27 @@ function Polygon(points, color, blurCount, strokeStyle) {
 	this.color = color;
 	this.blurCount = blurCount;
 	this.strokeStyle = strokeStyle;
-	
-	this.boundingBox = function() {
+	this._boundingBox = null;
+
+	this.recomputeBoundingBox = function() {
 		var minX = 0;
 		var minY = 0;
-		var maxX = 0; 
+		var maxX = 0;
 		var maxY = 0;
 		this.points.forEach(function(polygonPoint) {
-			if(polygonPoint[0] < minX) {
-				minX = polygonPoint[0];
-			}
-			
-			if (polygonPoint[0] > maxX) {
-				maxX = polygonPoint[0];
-			}
-			
-			if(polygonPoint[1] < minY) {
-				minY = polygonPoint[1];
-			}
-			
-			if (polygonPoint[1] > maxY) {
-				maxY = polygonPoint[1];
-			}
-			
+			if (polygonPoint[0] < minX) minX = polygonPoint[0];
+			if (polygonPoint[0] > maxX) maxX = polygonPoint[0];
+			if (polygonPoint[1] < minY) minY = polygonPoint[1];
+			if (polygonPoint[1] > maxY) maxY = polygonPoint[1];
 		});
+		this._boundingBox = [[minX, minY], [maxX, minY], [maxX, maxY], [minX, maxY]];
+	};
 
-        return [[minX, minY], [maxX, minY], [maxX, maxY], [minX, maxY]];
-	}
+	this.boundingBox = function() {
+		return this._boundingBox;
+	};
 
+	this.recomputeBoundingBox();
 }
 
 function scalePoint(point, scale) {

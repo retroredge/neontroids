@@ -48,7 +48,7 @@ function ShipSprite(x, y) {
     this.angle = 0;
     this.acceleration = 0.2;
     this.maxVelocity = 150;
-    this.blurCount = 8;
+    this.blurCount = 6;
     this.angleIncrement = 4.0;
     this.missiles = [];
     this.missileTtl = 50;
@@ -58,7 +58,8 @@ function ShipSprite(x, y) {
         this.angle += this.angleIncrement * direction;
         this.sprite.polygon.points = this.origPoints.map(function (polygonPoint) {
             return rotatePoint(polygonPoint, ship.angle);
-        })
+        });
+        this.sprite.polygon.recomputeBoundingBox();
     };
 
     this.thrust = function thrust() {
@@ -138,7 +139,7 @@ function RockSprite(x, y, sizeIndex) {
         var velocities = [1.5, 3.0, 4.5];
     var scales = [2.5, 1.5, 0.6];
     var colours = ['#00ff00', '#00ff00', '#00ff00'];
-    var blurCounts = [3, 3, 2];
+    var blurCounts = [2, 2, 2];
 
     this.sizeIndex = sizeIndex;
     this.scale = scales[sizeIndex];
@@ -166,7 +167,7 @@ function RockSprite(x, y, sizeIndex) {
 function DebrisSprite(x, y) {
     this.name = "debris";
     this.points = [[0, -1], [1, 0], [-1, 0]];
-    this.blurCount = 2;
+    this.blurCount = 1;
     this.ttl = 50;
     this.redValue = 255;
     this.ship = ship;

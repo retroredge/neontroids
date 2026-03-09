@@ -38,7 +38,7 @@ function displayAttractMessage() {
         ctx.shadowColor = '#0000FF';
 
         for (var j = 1; j < 6; j++) {
-            ctx.shadowBlur = j * 27;
+            ctx.shadowBlur = j * 10;
             ctx.fillText(text, (canvas.width / 2) - ctx.measureText(text).width / 2, canvas.height / 2 - 50);
         }
 
