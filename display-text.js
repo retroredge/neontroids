@@ -20,8 +20,8 @@ function displayFps() {
     }
 
     ctx.fillStyle = "white";
-    ctx.font = "8px Arial";
-    var text = frameRate + " fps";
+    ctx.font = "10px Arial";
+    var text = frameRate + " FPS";
     var textWidth = ctx.measureText(text).width;
     ctx.fillText(text, (canvas.width / 2) - textWidth / 2, canvas.height);
     oldTime = Date.now();
